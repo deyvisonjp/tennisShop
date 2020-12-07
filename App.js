@@ -1,21 +1,28 @@
+import 'react-native-gesture-handler';
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import { AppLoading } from 'expo';
+import { useFonts, JosefinSans_400Regular } from '@expo-google-fonts/josefin-sans'
+
+import Routes from './src/router';
 
 export default function App() {
+
+  let [fontsLoaded] = useFonts({
+    JosefinSans_400Regular,
+  }); // Carrega a página somente depois que a fonte fopr carregada
+
+  if(!fontsLoaded) {
+    return <AppLoading />
+  }
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <>
+      <StatusBar style="light"  backgroundColor="#000" translucent={true} />
+      <Routes/>
+    </>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+// https://youtu.be/RZbz26EVysA?t=884
